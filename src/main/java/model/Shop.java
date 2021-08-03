@@ -3,13 +3,17 @@ package model;
 import dao.ShopInterface;
 import org.sql2o.Connection;
 
-public class Shop implements ShopInterface {
+import java.util.ArrayList;
+
+public class Shop {
     private String name;
     private int id;
+    private static ArrayList<Shop> insntances = new ArrayList<>();
 
     public Shop(String name, int id){
         this.name= name;
         this.id = id;
+        insntances.add(this);
     }
 
     public String getName() {
@@ -28,51 +32,10 @@ public class Shop implements ShopInterface {
     public void setId(int id) {
         this.id = id;
     }
-
-    @Override
-    public void save() {
-        try(Connection con = DB.sql2o.open()) {
-            String sql = "INSERT INTO shops (name) VALUES (:name);";
-            this.id = (int) con.createQuery(sql, true)
-                    .addParameter("name", this.name)
-                    .executeUpdate()
-                    .getKey();
-        }
+    public static ArrayList<Shop> getAllInstances(){
+        return insntances;
     }
-
-    @Override
-    public void add(Shop shop) {
-        String sql = "INSERT INTO shops(name, id) VALUES(:name, :id)";
-        try(Connection con = DB.sql2o.open()){
-            int id = (int) con.createQuery(sql,true)
-                    .addParameter("name", this.name)
-                    .addParameter("id", this.id)
-                    .bind(shop)
-                    .executeUpdate()
-                    .getKey();
-            shop.setId(id);
-        }catch(sql2oException ex){
-            System.out.println(ex);
-        }
-    }
-
-    @Override
-    public Shop findById(int id) {
-        return null;
-    }
-
-    @Override
-    public void update(int id, String name) {
-
-    }
-
-    @Override
-    public void deleteById(int id) {
-
-    }
-
-    @Override
-    public void clearAllTasks() {
-
+    public static void clearAllShop(){
+        insntances.clear();
     }
 }
