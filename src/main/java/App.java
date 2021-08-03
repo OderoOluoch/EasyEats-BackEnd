@@ -32,7 +32,7 @@ public class App {
         });
 
         //Create a menu item
-        post("/menus/new", "application/json", (req, res) -> {
+        post("/api/v1/menus/new", "application/json", (req, res) -> {
             Menu menu = gson.fromJson(req.body(), Menu.class);
             menuDao.add(menu);
             res.status(201);
@@ -40,12 +40,12 @@ public class App {
         });
 
         //Read all departments
-        get("/menus", "application/json", (req, res) -> { //accept a request in format JSON from an app
+        get("/api/v1/menus", "application/json", (req, res) -> { //accept a request in format JSON from an app
             return gson.toJson(menuDao.getAll());//send it back to be displayed
         });
 
         //Get department by Id
-        get("/menus/:id", "application/json", (req, res) -> { //accept a request in format JSON from an app
+        get("/api/v1/menus/:id", "application/json", (req, res) -> { //accept a request in format JSON from an app
             int departmentId = Integer.parseInt(req.params("id"));
             Menu menuToFind = menuDao.findById(departmentId);
             if (menuToFind == null){
