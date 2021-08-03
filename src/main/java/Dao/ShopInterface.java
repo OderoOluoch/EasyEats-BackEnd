@@ -3,6 +3,7 @@ package Dao;
 import Models.Shop;
 
 public interface ShopInterface {
+    void save();
     //CREATE
     void add(Shop shop);
 
