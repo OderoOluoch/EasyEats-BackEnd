@@ -1,8 +1,10 @@
 import com.google.gson.Gson;
 import dao.Sql2oMenuDao;
+import dao.Sql2oShopDao;
 import dao.Sql2oWaiterDao;
 import exceptions.ApiException;
 import model.Menu;
+import model.Shop;
 import model.Waiter;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
@@ -16,6 +18,7 @@ public class App {
 
         Sql2oMenuDao menuDao;
         Sql2oWaiterDao waiterDao;
+        Sql2oShopDao ShopInterface;
 
         Connection conn;
         Gson gson = new Gson();
@@ -26,6 +29,7 @@ public class App {
 
         menuDao = new Sql2oMenuDao(sql2o);
         waiterDao = new Sql2oWaiterDao(sql2o);
+        ShopInterface = new Sql2oShopDao(sql2o);
         conn = sql2o.open();
 
         //Home url
@@ -91,6 +95,30 @@ public class App {
                 return gson.toJson(menuToFind);
             }
 
+        });
+
+        //Create a Shop
+        post("/api/v1/shop/new", "application/json", (req, res)->{
+            Shop shop = gson.fromJson(req.body(),Shop.class);
+            ShopInterface.add(shop);
+            res.status(201);
+            return gson.toJson(shop);
+        });
+
+        //Read all shops
+        get("/api/v1/shops", "application/json", (req,res)->{
+            return  gson.toJson(ShopInterface.getAll());
+        });
+
+        //Read a single shop by id
+        get("/api/v1/shops/:id", "application/json", (req,res)->{
+          int id = Integer.parseInt(req.params("id"));
+          Shop shop = ShopInterface.findById(id);
+          if(shop == null){
+              throw new ApiException(404, String.format("No Shop with the id: \"%s\" exists", req.params("id")));
+          }else{
+              return gson.toJson(shop);
+          }
         });
 
     }
