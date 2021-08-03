@@ -17,7 +17,7 @@ public class Sql2oMenuDao implements MenuDao {
 
     @Override
     public void add(Menu menu) {
-        String sql = "INSERT INTO news (name) VALUES (:name)"; //if you change your model, be sure to update here as well!
+        String sql = "INSERT INTO menu (name) VALUES (:name)"; //if you change your model, be sure to update here as well!
         try (Connection con = sql2o.open()) {
             int id = (int) con.createQuery(sql, true)
                     .bind(menu)
