@@ -1,0 +1,6 @@
+SET MODE PostgreSQL;
+
+CREATE TABLE IF NOT EXISTS shops (
+  id serial PRIMARY KEY,
+  name VARCHAR
+);
