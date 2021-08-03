@@ -1,13 +1,14 @@
 package dao;
 
 import model.Menu;
+import model.Waiter;
 
 import java.util.List;
 
 public interface WaiterDao {
 
     //create
-    void add(Menu menu);
+    void add(Waiter waiter);
 
     //Retrieve menu by ID
     Menu findById(int id);
@@ -15,7 +16,7 @@ public interface WaiterDao {
 
 
     //retrieve all menu items in the DB
-    List<Menu> getAll();
+    List<Waiter> getAll();
 
 
     //update
