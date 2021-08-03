@@ -1,6 +1,6 @@
-package Dao;
+package dao;
 
-import Models.Shop;
+import model.Shop;
 
 public interface ShopInterface {
     void save();

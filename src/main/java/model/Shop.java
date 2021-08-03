@@ -1,6 +1,6 @@
-package Models;
+package model;
 
-import Dao.ShopInterface;
+import dao.ShopInterface;
 import org.sql2o.Connection;
 
 public class Shop implements ShopInterface {
