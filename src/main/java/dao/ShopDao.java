@@ -4,7 +4,7 @@ import model.Shop;
 
 import java.util.List;
 
-public interface ShopInterface {
+public interface ShopDao {
     void save();
     //CREATE
     void add(Shop shop);

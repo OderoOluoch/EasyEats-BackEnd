@@ -7,7 +7,7 @@ import org.sql2o.Sql2oException;
 
 import java.util.List;
 
-public class Sql2oShopDao implements ShopInterface{
+public class Sql2oShopDao implements ShopDao {
     private Sql2o sql2o;
 
     public Sql2oShopDao(Sql2o sql2o){

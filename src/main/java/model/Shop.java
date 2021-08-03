@@ -1,8 +1,5 @@
 package model;
 
-import dao.ShopInterface;
-import org.sql2o.Connection;
-
 import java.util.ArrayList;
 
 public class Shop {
