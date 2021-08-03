@@ -1,6 +1,8 @@
 package Models;
 
-public class Shop {
+import Dao.ShopInterface;
+
+public class Shop implements ShopInterface {
     private String name;
     private int id;
 
@@ -24,5 +26,30 @@ public class Shop {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public void add(Shop shop) {
+
+    }
+
+    @Override
+    public Shop findById(int id) {
+        return null;
+    }
+
+    @Override
+    public void update(int id, String name) {
+
+    }
+
+    @Override
+    public void deleteById(int id) {
+
+    }
+
+    @Override
+    public void clearAllTasks() {
+
     }
 }
