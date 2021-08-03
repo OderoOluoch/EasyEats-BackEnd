@@ -14,7 +14,7 @@ public interface ShopInterface {
     Shop findById(int id);
 
     //UPDATE
-    void update(int id, String name);
+    void update(Shop shop,int id, String name);
 
     //DELETE
     void deleteById(int id);

@@ -3,6 +3,7 @@ package dao;
 import model.Shop;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
+import org.sql2o.Sql2oException;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class Sql2oShopDao implements ShopInterface{
 
     @Override
     public void add(Shop shop) {
-        String sql = "INSERT INTO shops(name, id) VALUES(:name, :id)";
+        String sql = "INSERT INTO shops(name) VALUES(:name)";
         try (Connection con = sql2o.open()){
             int id = (int) con.createQuery(sql, true)
                     .bind(shop)
@@ -46,17 +47,37 @@ public class Sql2oShopDao implements ShopInterface{
     }
 
     @Override
-    public void update(int id, String name) {
+    public void update(Shop shop, int id, String name) {
+        String sql = "UPDATE shops SET(name)=(:name) WHERE id=:id";
+        try(Connection con = sql2o.open()){
+            con.createQuery(sql)
+                    .addParameter("id", id)
+                    .addParameter("name", name)
+                    .executeUpdate();
+            shop.setName(name);
 
+        }
     }
 
     @Override
     public void deleteById(int id) {
-
+        String sql = "DELETE FROM shops WHERE id= :id";
+        try(Connection con = sql2o.open()){
+            con.createQuery(sql)
+                    .addParameter("id", id)
+                    .executeUpdate();
+        }catch (Sql2oException ex){
+            System.out.println(ex);
+        }
     }
 
     @Override
     public void clearAllTasks() {
-
+        String sql = "DELETE * FROM shops";
+        try(Connection con = sql2o.open()){
+            con.createQuery(sql).executeUpdate();
+        }catch(Sql2oException ex){
+            System.out.println(ex);
+        }
     }
 }
