@@ -17,7 +17,7 @@ public class Sql2oOrderTypeDao implements OrderTypeDao{
 
     @Override
     public void add(OrderType orderType) {
-        String sql = "INSERT INTO menu (name) VALUES (:name)"; //if you change your model, be sure to update here as well!
+        String sql = "INSERT INTO order_type (name) VALUES (:name)"; //if you change your model, be sure to update here as well!
         try (Connection con = sql2o.open()) {
             int id = (int) con.createQuery(sql, true)
                     .bind(orderType)
@@ -34,7 +34,7 @@ public class Sql2oOrderTypeDao implements OrderTypeDao{
     @Override
     public List<OrderType> getAll() {
         try (Connection con = sql2o.open()) {
-            return con.createQuery("SELECT * FROM menu")
+            return con.createQuery("SELECT * FROM order_type")
                     .executeAndFetch(OrderType.class);
         }
     }
@@ -43,7 +43,7 @@ public class Sql2oOrderTypeDao implements OrderTypeDao{
     @Override
     public OrderType findById(int id) {
         try (Connection con = sql2o.open()) {
-            return con.createQuery("SELECT * FROM menu WHERE id = :id")
+            return con.createQuery("SELECT * FROM order_type WHERE id = :id")
                     .addParameter("id", id)
                     .executeAndFetchFirst(OrderType.class);
         }
@@ -69,7 +69,7 @@ public class Sql2oOrderTypeDao implements OrderTypeDao{
 
     @Override
     public void clearAll() {
-        String sql = "DELETE from menu";
+        String sql = "DELETE from order_type";
         try (Connection con = sql2o.open()) {
             con.createQuery(sql).executeUpdate();
         } catch (Sql2oException ex) {

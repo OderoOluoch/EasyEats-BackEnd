@@ -18,7 +18,7 @@ public class Sql2oNextGenTableDao implements NextGenTableDao{
 
     @Override
     public void add(NextGenTable table) {
-        String sql = "INSERT INTO menu (name) VALUES (:name)"; //if you change your model, be sure to update here as well!
+        String sql = "INSERT INTO next_gen_table (name) VALUES (:name)"; //if you change your model, be sure to update here as well!
         try (Connection con = sql2o.open()) {
             int id = (int) con.createQuery(sql, true)
                     .bind(table)
@@ -35,7 +35,7 @@ public class Sql2oNextGenTableDao implements NextGenTableDao{
     @Override
     public List<NextGenTable> getAll() {
         try (Connection con = sql2o.open()) {
-            return con.createQuery("SELECT * FROM menu")
+            return con.createQuery("SELECT * FROM next_gen_table")
                     .executeAndFetch(NextGenTable.class);
         }
     }
@@ -44,7 +44,7 @@ public class Sql2oNextGenTableDao implements NextGenTableDao{
     @Override
     public NextGenTable findById(int id) {
         try (Connection con = sql2o.open()) {
-            return con.createQuery("SELECT * FROM menu WHERE id = :id")
+            return con.createQuery("SELECT * FROM next_gen_table WHERE id = :id")
                     .addParameter("id", id)
                     .executeAndFetchFirst(NextGenTable.class);
         }
@@ -70,7 +70,7 @@ public class Sql2oNextGenTableDao implements NextGenTableDao{
 
     @Override
     public void clearAll() {
-        String sql = "DELETE from menu";
+        String sql = "DELETE from next_gen_table";
         try (Connection con = sql2o.open()) {
             con.createQuery(sql).executeUpdate();
         } catch (Sql2oException ex) {
