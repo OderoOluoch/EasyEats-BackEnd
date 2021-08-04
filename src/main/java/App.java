@@ -1,11 +1,7 @@
 import com.google.gson.Gson;
-import dao.Sql2oMenuDao;
-import dao.Sql2oShopDao;
-import dao.Sql2oWaiterDao;
+import dao.*;
 import exceptions.ApiException;
-import model.Menu;
-import model.Shop;
-import model.Waiter;
+import model.*;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
@@ -18,7 +14,9 @@ public class App {
 
         Sql2oMenuDao menuDao;
         Sql2oWaiterDao waiterDao;
-        Sql2oShopDao ShopInterface;
+        Sql2oShopDao shopDao;
+        Sql2oNextGenTableDao tableDao;
+        Sql2oOrderTypeDao orderTypeDao;
 
         Connection conn;
         Gson gson = new Gson();
@@ -29,7 +27,11 @@ public class App {
 
         menuDao = new Sql2oMenuDao(sql2o);
         waiterDao = new Sql2oWaiterDao(sql2o);
-        ShopInterface = new Sql2oShopDao(sql2o);
+        shopDao = new Sql2oShopDao(sql2o);
+        tableDao = new Sql2oNextGenTableDao(sql2o);
+        orderTypeDao = new Sql2oOrderTypeDao(sql2o);
+
+
         conn = sql2o.open();
 
         //Home url
@@ -97,28 +99,87 @@ public class App {
 
         });
 
+
+
         //Create a Shop
         post("/api/v1/shop/new", "application/json", (req, res)->{
             Shop shop = gson.fromJson(req.body(),Shop.class);
-            ShopInterface.add(shop);
+            shopDao.add(shop);
             res.status(201);
             return gson.toJson(shop);
         });
 
         //Read all shops
         get("/api/v1/shops", "application/json", (req,res)->{
-            return  gson.toJson(ShopInterface.getAll());
+            return  gson.toJson(shopDao.getAll());
         });
 
         //Read a single shop by id
         get("/api/v1/shops/:id", "application/json", (req,res)->{
           int id = Integer.parseInt(req.params("id"));
-          Shop shop = ShopInterface.findById(id);
+          Shop shop = shopDao.findById(id);
           if(shop == null){
               throw new ApiException(404, String.format("No Shop with the id: \"%s\" exists", req.params("id")));
           }else{
               return gson.toJson(shop);
           }
+        });
+
+
+
+
+
+
+        //Create a table
+        post("/api/v1/tables/new", "application/json", (req, res)->{
+            NextGenTable table = gson.fromJson(req.body(),NextGenTable.class);
+            tableDao.add(table);
+            res.status(201);
+            return gson.toJson(table);
+        });
+
+        //Read all shops
+        get("/api/v1/tables", "application/json", (req,res)->{
+            return  gson.toJson(tableDao.getAll());
+        });
+
+        //Read a single shop by id
+        get("/api/v1/tables/:id", "application/json", (req,res)->{
+            int id = Integer.parseInt(req.params("id"));
+            NextGenTable table = tableDao.findById(id);
+            if(table == null){
+                throw new ApiException(404, String.format("No table with the id: \"%s\" exists", req.params("id")));
+            }else{
+                return gson.toJson(table);
+            }
+        });
+
+
+
+
+
+        //Create an Order Type
+        post("/api/v1/order_types/new", "application/json", (req, res)->{
+            OrderType orderType = gson.fromJson(req.body(),OrderType.class);
+            orderTypeDao.add(orderType);
+            res.status(201);
+            return gson.toJson(orderType);
+        });
+
+        //Read all shops
+        get("/api/v1/order_types", "application/json", (req,res)->{
+            return  gson.toJson(orderTypeDao.getAll());
+        });
+
+        //Read a single shop by id
+        get("/api/v1/order_types/:id", "application/json", (req,res)->{
+            int id = Integer.parseInt(req.params("id"));
+            OrderType orderType = orderTypeDao.findById(id);
+            if(orderType == null){
+                throw new ApiException(404, String.format("No table with the id: \"%s\" exists", req.params("id")));
+            }else{
+                return gson.toJson(orderType);
+            }
         });
 
     }
