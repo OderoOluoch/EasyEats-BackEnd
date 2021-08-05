@@ -155,9 +155,6 @@ public class App {
         });
 
 
-
-
-
         //Create an Order Type
         post("/api/v1/order_types/new", "application/json", (req, res)->{
             OrderType orderType = gson.fromJson(req.body(),OrderType.class);
