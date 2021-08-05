@@ -18,6 +18,6 @@ public interface CuisineDao {
     void update(Cuisine cuisine,int id, String FoodType,int price, int MenuId);
 
     //DELETE
-    void deleteById();
+    void deleteById(int id);
     void clearAllTasks();
 }
