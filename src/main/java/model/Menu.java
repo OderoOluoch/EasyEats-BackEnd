@@ -1,14 +1,28 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Menu {
     private int id;
     private String name;
+    private static List<Menu> instances = new ArrayList<>();
+    private List<Cuisine> cuisines;
 
     public Menu(int id, String name) {
         this.id = id;
         this.name = name;
+        instances.add(this);
+        cuisines = new ArrayList<Cuisine>();
+    }
+
+    public static List<Menu> getInstances() {
+        return instances;
+    }
+
+    public static void setInstances(List<Menu> instances) {
+        Menu.instances = instances;
     }
 
     public int getId() {
@@ -38,5 +52,13 @@ public class Menu {
     @Override
     public int hashCode() {
         return Objects.hash(id, name);
+    }
+
+    public List<Cuisine> getCuisines() {
+        return cuisines;
+    }
+
+    public void setCuisines(List<Cuisine> cuisines) {
+        this.cuisines = cuisines;
     }
 }

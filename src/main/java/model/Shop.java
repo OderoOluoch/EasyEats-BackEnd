@@ -5,12 +5,12 @@ import java.util.ArrayList;
 public class Shop {
     private String name;
     private int id;
-    private static ArrayList<Shop> insntances = new ArrayList<>();
+    private static ArrayList<Shop> instances = new ArrayList<>();
 
     public Shop(String name, int id){
         this.name= name;
         this.id = id;
-        insntances.add(this);
+        instances.add(this);
     }
 
     public String getName() {
@@ -30,9 +30,9 @@ public class Shop {
         this.id = id;
     }
     public static ArrayList<Shop> getAllInstances(){
-        return insntances;
+        return instances;
     }
     public static void clearAllShop(){
-        insntances.clear();
+        instances.clear();
     }
 }
