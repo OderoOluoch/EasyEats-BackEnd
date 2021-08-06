@@ -7,22 +7,22 @@ CREATE TABLE IF NOT EXISTS shops (
   name VARCHAR
 );
 
-CREATE TABLE IF NOT EXISTS waiters (
+CREATE TABLE IF NOT EXISTS waiter (
   id serial PRIMARY KEY,
   name VARCHAR
 );
 
-CREATE TABLE IF NOT EXISTS order_types (
+CREATE TABLE IF NOT EXISTS order_type (
   id serial PRIMARY KEY,
   name VARCHAR
 );
 
-CREATE TABLE IF NOT EXISTS next_gen_tables (
+CREATE TABLE IF NOT EXISTS next_gen_table (
   id serial PRIMARY KEY,
   name VARCHAR
 );
 
-CREATE TABLE IF NOT EXISTS menus (
+CREATE TABLE IF NOT EXISTS menu (
   id serial PRIMARY KEY,
   name VARCHAR
 );
