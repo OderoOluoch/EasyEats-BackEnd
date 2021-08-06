@@ -8,8 +8,18 @@ import org.sql2o.Sql2o;
 import static spark.Spark.*;
 
 public class App {
+    static int getHerokuAssignedPort() {
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        if (processBuilder.environment().get("PORT") != null) {
+            return Integer.parseInt(processBuilder.environment().get("PORT"));
+        }
+        return 4567; //return default port if heroku-port isn't set (i.e. on localhost)
+    }
+
+
     public static void main(String[] args) {
 
+        port(getHerokuAssignedPort());
         staticFileLocation("/public");
 
         Sql2oMenuDao menuDao;
@@ -21,8 +31,11 @@ public class App {
         Connection conn;
         Gson gson = new Gson();
 
-        String connectionString = "jdbc:postgresql://localhost:5432/easyeats";
-        Sql2o sql2o = new Sql2o(connectionString,  "moringa", "kidero");
+//        String connectionString = "jdbc:postgresql://localhost:5432/easyeats";
+//        Sql2o sql2o = new Sql2o(connectionString,  "moringa", "kidero");
+
+        String connectionString = "jdbc:postgresql://ec2-54-211-160-34.compute-1.amazonaws.com:5432/d6uji9646strn2"; //!
+        Sql2o sql2o = new Sql2o(connectionString, "oxpycedyoxgsyz", "499f26ca77bdb24a0198a064d62f41248eb91b6788a504b1bab8279948c8dc9e"); //!
 
 
         menuDao = new Sql2oMenuDao(sql2o);
@@ -96,7 +109,6 @@ public class App {
             else {
                 return gson.toJson(menuToFind);
             }
-
         });
 
 
@@ -124,10 +136,6 @@ public class App {
               return gson.toJson(shop);
           }
         });
-
-
-
-
 
 
         //Create a table

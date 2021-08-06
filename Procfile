@@ -1,0 +1,1 @@
+web : ./build/install/easyeatsodero/bin/easyeatsodero
