@@ -1,5 +1,7 @@
 SET MODE PostgreSQL;
 
+CREATE DATABASE easyeats;
+
 CREATE TABLE IF NOT EXISTS shops (
   id serial PRIMARY KEY,
   name VARCHAR
