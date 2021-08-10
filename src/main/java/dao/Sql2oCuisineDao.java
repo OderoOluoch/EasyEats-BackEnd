@@ -13,10 +13,6 @@ public class Sql2oCuisineDao  implements CuisineDao{
     public Sql2oCuisineDao(Sql2o sql2o){
         this.sql2o = sql2o;
     }
-    @Override
-    public void save() {
-
-    }
 
     @Override
     public void add(Cuisine cuisine) {
@@ -26,6 +22,16 @@ public class Sql2oCuisineDao  implements CuisineDao{
                     .bind(cuisine)
                     .executeUpdate().getKey();
             cuisine.setId(id);
+        }
+    }
+
+
+    @Override
+    public List<Cuisine> getAllCuisinesForAMenu(int menu_id) {
+        try (Connection con = sql2o.open()) {
+            return con.createQuery("SELECT * FROM cuisines WHERE MenuId = :menu_id")
+                    .addParameter("restaurantId", menu_id)
+                    .executeAndFetch(Cuisine.class);
         }
     }
 

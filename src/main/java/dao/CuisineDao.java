@@ -5,13 +5,12 @@ import model.Cuisine;
 import java.util.List;
 
 public interface CuisineDao {
-    void save();
-
     //CREATE
     void add(Cuisine cuisine);
 
     //READ
     List<Cuisine> getAll();
+    List <Cuisine> getAllCuisinesForAMenu(int id);
     Cuisine findById(int id);
 
     //UPDATE
