@@ -7,15 +7,25 @@ import java.util.Objects;
 public class Menu {
     private int id;
     private String name;
+    private String description;
     private int shop_id;
     private static List<Menu> instances = new ArrayList<>();
     private List<Cuisine> cuisines;
 
-    public Menu(int id, String name) {
+    public Menu(int id, String name, String description, int shop_id, List<Cuisine> cuisines) {
         this.id = id;
         this.name = name;
-        instances.add(this);
-        cuisines = new ArrayList<Cuisine>();
+        this.description = description;
+        this.shop_id = shop_id;
+        this.cuisines = cuisines;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public static List<Menu> getInstances() {
@@ -44,6 +54,22 @@ public class Menu {
         this.name = name;
     }
 
+    public List<Cuisine> getCuisines() {
+        return cuisines;
+    }
+
+    public void setCuisines(List<Cuisine> cuisines) {
+        this.cuisines = cuisines;
+    }
+
+    public int getShop_id() {
+        return shop_id;
+    }
+
+    public void setShop_id(int shop_id) {
+        this.shop_id = shop_id;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -55,13 +81,5 @@ public class Menu {
     @Override
     public int hashCode() {
         return Objects.hash(id, name);
-    }
-
-    public List<Cuisine> getCuisines() {
-        return cuisines;
-    }
-
-    public void setCuisines(List<Cuisine> cuisines) {
-        this.cuisines = cuisines;
     }
 }
