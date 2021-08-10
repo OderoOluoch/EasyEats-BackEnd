@@ -17,5 +17,5 @@ public interface ShopDao {
 
     //DELETE
     void deleteById(int id);
-    void clearAllTasks();
+    void clearAllShops();
 }

@@ -68,7 +68,7 @@ public class Sql2oShopDao implements ShopDao {
     }
 
     @Override
-    public void clearAllTasks() {
+    public void clearAllShops() {
         String sql = "DELETE * FROM shops";
         try(Connection con = sql2o.open()){
             con.createQuery(sql).executeUpdate();
