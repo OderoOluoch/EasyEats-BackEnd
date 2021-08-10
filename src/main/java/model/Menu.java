@@ -7,6 +7,7 @@ import java.util.Objects;
 public class Menu {
     private int id;
     private String name;
+    private int shop_id;
     private static List<Menu> instances = new ArrayList<>();
     private List<Cuisine> cuisines;
 
@@ -24,6 +25,8 @@ public class Menu {
     public static void setInstances(List<Menu> instances) {
         Menu.instances = instances;
     }
+
+
 
     public int getId() {
         return id;
