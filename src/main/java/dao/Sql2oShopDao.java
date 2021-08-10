@@ -14,10 +14,6 @@ public class Sql2oShopDao implements ShopDao {
         this.sql2o = sql2o;
     }
 
-    @Override
-    public void save() {
-
-    }
 
     @Override
     public void add(Shop shop) {
