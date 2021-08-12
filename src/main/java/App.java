@@ -32,11 +32,11 @@ public class App {
         Connection conn;
         Gson gson = new Gson();
 
-        String connectionString = "jdbc:postgresql://localhost:5432/easyeats";
-        Sql2o sql2o = new Sql2o(connectionString,  "moringa", "kidero");
+       // String connectionString = "jdbc:postgresql://localhost:5432/easyeats";
+        //Sql2o sql2o = new Sql2o(connectionString,  "moringa", "kidero");
 
-//        String connectionString = "jdbc:postgresql://ec2-54-211-160-34.compute-1.amazonaws.com:5432/d6uji9646strn2"; //!
-//        Sql2o sql2o = new Sql2o(connectionString, "oxpycedyoxgsyz", "499f26ca77bdb24a0198a064d62f41248eb91b6788a504b1bab8279948c8dc9e"); //!
+        String connectionString = "jdbc:postgresql://ec2-54-205-232-84.compute-1.amazonaws.com:5432/dal28rppnvpc7q"; //!
+        Sql2o sql2o = new Sql2o(connectionString, "jmlvmwjddfacno", "c7eec8209a29c3902cdb894f876bd162a12ee1d5a64635800202dd4920728f3d"); //!
 
 
         menuDao = new Sql2oMenuDao(sql2o);
