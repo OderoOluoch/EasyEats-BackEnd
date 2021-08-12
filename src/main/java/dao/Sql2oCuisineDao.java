@@ -16,7 +16,7 @@ public class Sql2oCuisineDao  implements CuisineDao{
 
     @Override
     public void add(Cuisine cuisine) {
-        String sql = "INSERT INTO cuisines(FoodType, price, MenuId) VALUES(:FoodType, :price, :MenuId)";
+        String sql = "INSERT INTO cuisines(foodType, price, menu_id) VALUES(:foodType, :price, :menu_id)";
         try(Connection con = sql2o.open()){
             int id = (int) con.createQuery(sql, true)
                     .bind(cuisine)
@@ -29,7 +29,7 @@ public class Sql2oCuisineDao  implements CuisineDao{
     @Override
     public List<Cuisine> getAllCuisinesForAMenu(int menu_id) {
         try (Connection con = sql2o.open()) {
-            return con.createQuery("SELECT * FROM cuisines WHERE MenuId = :menu_id")
+            return con.createQuery("SELECT * FROM cuisines WHERE menu_id = :menu_id")
                     .addParameter("restaurantId", menu_id)
                     .executeAndFetch(Cuisine.class);
         }
@@ -52,18 +52,18 @@ public class Sql2oCuisineDao  implements CuisineDao{
     }
 
     @Override
-    public void update(Cuisine cuisine, int id, String FoodType, int price, int MenuId) {
-        String sql = "UPDATE cuisines SETS(foodType, price, menuId)= (:foodType, :price, :menuId) WHERE id=:id";
+    public void update(Cuisine cuisine, int id, String FoodType, int price, int menu_id) {
+        String sql = "UPDATE cuisines SETS(foodType, price, menu_id)= (:foodType, :price, :menu_id) WHERE id=:id";
         try(Connection con = sql2o.open()){
             con.createQuery(sql)
                     .addParameter("id", id)
                     .addParameter("foodType", FoodType)
                     .addParameter("price", price)
-                    .addParameter("menuId", MenuId)
+                    .addParameter("menuId", menu_id)
                     .executeUpdate();
             cuisine.setFoodType(FoodType);
             cuisine.setPrice(price);
-            cuisine.setMenuId(MenuId);
+            cuisine.setMenuId(menu_id);
         }
     }
 

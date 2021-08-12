@@ -5,18 +5,18 @@ import java.util.List;
 
 public class Cuisine {
     private int id;
-    private String FoodType;
+    private String foodType;
     private int price;
-    private int MenuId;
+    private int menuId;
     private static List<Cuisine> instances = new ArrayList<Cuisine>();
 
 
 
     public Cuisine(int id, String FoodType, int price, int MenuId){
         this.id = id;
-        this.FoodType = FoodType;
+        this.foodType = FoodType;
         this.price = price;
-        this.MenuId = MenuId;
+        this.menuId = MenuId;
         instances.add(this);
     }
 
@@ -37,11 +37,11 @@ public class Cuisine {
     }
 
     public String getFoodType() {
-        return FoodType;
+        return foodType;
     }
 
     public void setFoodType(String foodType) {
-        FoodType = foodType;
+        foodType = foodType;
     }
 
     public int getPrice() {
@@ -53,10 +53,10 @@ public class Cuisine {
     }
 
     public int getMenuId() {
-        return MenuId;
+        return menuId;
     }
 
     public void setMenuId(int menuId) {
-        MenuId = menuId;
+        menuId = menuId;
     }
 }

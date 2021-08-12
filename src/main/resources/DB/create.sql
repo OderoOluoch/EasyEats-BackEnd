@@ -35,5 +35,5 @@ CREATE TABLE IF NOT EXISTS cuisines(
 id serial PRIMARY KEY,
 foodType VARCHAR,
 price INTEGER,
-menuId INTEGER
+menu_id INTEGER
 );
