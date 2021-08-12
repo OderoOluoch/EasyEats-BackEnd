@@ -13,6 +13,7 @@ public interface WaiterDao {
     //Retrieve menu by ID
     Menu findById(int id);
 
+    List<Waiter> getAllWaitersByShop(int id);
 
 
     //retrieve all menu items in the DB

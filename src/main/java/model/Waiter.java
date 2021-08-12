@@ -5,10 +5,20 @@ import java.util.Objects;
 public class Waiter {
     private int id;
     private String name;
+    private int shop_id;
 
-    public Waiter(int id, String name) {
+    public Waiter(int id, String name, int shop_id) {
         this.id = id;
         this.name = name;
+        this.shop_id = shop_id;
+    }
+
+    public int getShop_id() {
+        return shop_id;
+    }
+
+    public void setShop_id(int shop_id) {
+        this.shop_id = shop_id;
     }
 
     public int getId() {

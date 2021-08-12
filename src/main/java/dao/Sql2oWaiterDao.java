@@ -18,7 +18,7 @@ public class Sql2oWaiterDao implements WaiterDao{
 
     @Override
     public void add(Waiter waiter) {
-        String sql = "INSERT INTO waiter (name) VALUES (:name)"; //if you change your model, be sure to update here as well!
+        String sql = "INSERT INTO waiter (name, shop_id) VALUES (:name, :shop_id)"; //if you change your model, be sure to update here as well!
         try (Connection con = sql2o.open()) {
             int id = (int) con.createQuery(sql, true)
                     .bind(waiter)
@@ -27,6 +27,15 @@ public class Sql2oWaiterDao implements WaiterDao{
             waiter.setId(id);
         } catch (Sql2oException ex) {
             System.out.println(ex);
+        }
+    }
+
+    @Override
+    public List<Waiter> getAllWaitersByShop(int id) {
+        try (Connection con = sql2o.open()) {
+            return con.createQuery("SELECT * FROM waiter WHERE shop_id = :id")
+                    .addParameter("restaurantId", id)
+                    .executeAndFetch(Waiter.class);
         }
     }
 

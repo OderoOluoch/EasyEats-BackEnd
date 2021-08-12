@@ -17,7 +17,7 @@ public class Sql2oOrderTypeDao implements OrderTypeDao{
 
     @Override
     public void add(OrderType orderType) {
-        String sql = "INSERT INTO order_type (name) VALUES (:name)"; //if you change your model, be sure to update here as well!
+        String sql = "INSERT INTO order_type (name, shop_id) VALUES (:name, :shop_id)"; //if you change your model, be sure to update here as well!
         try (Connection con = sql2o.open()) {
             int id = (int) con.createQuery(sql, true)
                     .bind(orderType)
