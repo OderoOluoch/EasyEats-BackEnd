@@ -27,6 +27,7 @@ public class App {
         Sql2oShopDao shopDao;
         Sql2oNextGenTableDao tableDao;
         Sql2oOrderTypeDao orderTypeDao;
+        Sql2oCuisineDao cuisineDao;
 
         Connection conn;
         Gson gson = new Gson();
@@ -43,6 +44,7 @@ public class App {
         shopDao = new Sql2oShopDao(sql2o);
         tableDao = new Sql2oNextGenTableDao(sql2o);
         orderTypeDao = new Sql2oOrderTypeDao(sql2o);
+        cuisineDao = new Sql2oCuisineDao(sql2o);
 
 
         conn = sql2o.open();
@@ -208,6 +210,36 @@ public class App {
                 return gson.toJson(orderType);
             }
         });
+
+
+
+
+        //Create a cuisine item
+        post("/api/v1/cuisines/new", "application/json", (req, res) -> {
+            Cuisine cuisine = gson.fromJson(req.body(), Cuisine.class);
+            cuisineDao.add(cuisine);
+            res.status(201);
+            return gson.toJson(cuisine);
+        });
+
+        //Read all departments
+        get("/api/v1/cuisines", "application/json", (req, res) -> { //accept a request in format JSON from an app
+            return gson.toJson(cuisineDao.getAll());//send it back to be displayed
+        });
+
+        //Get department by Id
+        get("/api/v1/cuisines/:id", "application/json", (req, res) -> { //accept a request in format JSON from an app
+            int cuisineId = Integer.parseInt(req.params("id"));
+            Cuisine cusineToFind = cuisineDao.findById(cuisineId);
+            if (cusineToFind == null){
+                throw new ApiException(404, String.format("No cuisineId with the id: \"%s\" exists", req.params("id")));
+            }
+            else {
+                return gson.toJson(cuisineDao);
+            }
+
+        });
+
 
     }
 }
