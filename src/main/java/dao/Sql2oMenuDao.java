@@ -17,7 +17,7 @@ public class Sql2oMenuDao implements MenuDao {
 
     @Override
     public void add(Menu menu) {
-        String sql = "INSERT INTO menu (name) VALUES (:name)"; //if you change your model, be sure to update here as well!
+        String sql = "INSERT INTO menu (name, description,shop_id) VALUES (:name ,:description , :shop_id )"; //if you change your model, be sure to update here as well!
         try (Connection con = sql2o.open()) {
             int id = (int) con.createQuery(sql, true)
                     .bind(menu)
@@ -29,6 +29,14 @@ public class Sql2oMenuDao implements MenuDao {
         }
     }
 
+    @Override
+    public List<Menu> getAllMenusForAShop(int shopId) {
+        try (Connection con = sql2o.open()) {
+            return con.createQuery("SELECT * FROM menu WHERE shop_id = :shopId")
+                    .addParameter("restaurantId", shopId)
+                    .executeAndFetch(Menu.class);
+        }
+    }
 
 
     @Override

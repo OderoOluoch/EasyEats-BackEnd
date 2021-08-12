@@ -5,7 +5,6 @@ import model.Shop;
 import java.util.List;
 
 public interface ShopDao {
-    void save();
     //CREATE
     void add(Shop shop);
 
@@ -18,5 +17,5 @@ public interface ShopDao {
 
     //DELETE
     void deleteById(int id);
-    void clearAllTasks();
+    void clearAllShops();
 }

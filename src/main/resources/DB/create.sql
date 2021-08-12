@@ -9,12 +9,14 @@ CREATE TABLE IF NOT EXISTS shops (
 
 CREATE TABLE IF NOT EXISTS waiter (
   id serial PRIMARY KEY,
-  name VARCHAR
+  name VARCHAR,
+  shop_id INTEGER
 );
 
 CREATE TABLE IF NOT EXISTS order_type (
   id serial PRIMARY KEY,
-  name VARCHAR
+  name VARCHAR,
+  shop_id INTEGER
 );
 
 CREATE TABLE IF NOT EXISTS next_gen_table (
@@ -24,12 +26,14 @@ CREATE TABLE IF NOT EXISTS next_gen_table (
 
 CREATE TABLE IF NOT EXISTS menu (
   id serial PRIMARY KEY,
-  name VARCHAR
+  name VARCHAR,
+  description VARCHAR,
+  shop_id INTEGER
 );
 
 CREATE TABLE IF NOT EXISTS cuisines(
 id serial PRIMARY KEY,
 foodType VARCHAR,
 price INTEGER,
-menuId INTEGER
+menu_id INTEGER
 );
