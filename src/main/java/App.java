@@ -136,7 +136,7 @@ public class App {
 
 
         //Create a Shop
-        post("/api/v1/shop/new", "application/json", (req, res)->{
+        post("/api/v1/shops/new", "application/json", (req, res)->{
             Shop shop = gson.fromJson(req.body(),Shop.class);
             shopDao.add(shop);
             res.status(201);
