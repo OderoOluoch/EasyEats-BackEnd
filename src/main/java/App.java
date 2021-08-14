@@ -190,10 +190,9 @@ public class App {
             else {
                 return gson.toJson(shopDao.getAllMenusForAShop(shopId));
             }
-
-
-
         });
+
+
 
 
 

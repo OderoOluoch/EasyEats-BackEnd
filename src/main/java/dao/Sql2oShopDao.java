@@ -18,12 +18,15 @@ public class Sql2oShopDao implements ShopDao {
 
     @Override
     public void add(Shop shop) {
-        String sql = "INSERT INTO shops(name,tagline,image) VALUES(:name,:tagline,:image)";
+        String sql = "INSERT INTO shops(name,tagline,image) VALUES(:name, :tagline, :image)";
         try (Connection con = sql2o.open()){
             int id = (int) con.createQuery(sql, true)
                     .bind(shop)
-                    .executeUpdate().getKey();
+                    .executeUpdate()
+                    .getKey();
             shop.setId(id);
+        }catch (Sql2oException ex) {
+            System.out.println(ex);
         }
     }
 
@@ -51,7 +54,7 @@ public class Sql2oShopDao implements ShopDao {
                     .addParameter("id", id)
                     .addParameter("name", name)
                     .addParameter("tagline", tagline)
-                    .addParameter("name", image)
+                    .addParameter("image", image)
                     .executeUpdate();
             shop.setName(name);
         }
