@@ -16,7 +16,7 @@ public interface ShopDao {
     Shop findById(int id);
 
     //UPDATE
-    void update(Shop shop,int id, String name);
+    void update(Shop shop,int id, String name, String tagline, String image);
 
     //DELETE
     void deleteById(int id);

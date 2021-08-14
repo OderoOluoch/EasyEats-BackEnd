@@ -18,7 +18,7 @@ public class Sql2oShopDao implements ShopDao {
 
     @Override
     public void add(Shop shop) {
-        String sql = "INSERT INTO shops(name) VALUES(:name)";
+        String sql = "INSERT INTO shops(name,tagline,image) VALUES(:name,:tagline,:image)";
         try (Connection con = sql2o.open()){
             int id = (int) con.createQuery(sql, true)
                     .bind(shop)
@@ -44,15 +44,16 @@ public class Sql2oShopDao implements ShopDao {
     }
 
     @Override
-    public void update(Shop shop, int id, String name) {
-        String sql = "UPDATE shops SET(name)=(:name) WHERE id=:id";
+    public void update(Shop shop, int id, String name,String tagline,String image) {
+        String sql = "UPDATE shops SET(name,tagline,image)=(:name,:tagline,:image) WHERE id=:id";
         try(Connection con = sql2o.open()){
             con.createQuery(sql)
                     .addParameter("id", id)
                     .addParameter("name", name)
+                    .addParameter("tagline", tagline)
+                    .addParameter("name", image)
                     .executeUpdate();
             shop.setName(name);
-
         }
     }
 
@@ -79,8 +80,6 @@ public class Sql2oShopDao implements ShopDao {
     }
 
 
-
-
     @Override
     public List<Menu> getAllMenusForAShop(int shop_id) {
         try (Connection con = sql2o.open()) {
@@ -89,9 +88,5 @@ public class Sql2oShopDao implements ShopDao {
                     .executeAndFetch(Menu.class);
         }
     }
-
-
-
-
 
 }
