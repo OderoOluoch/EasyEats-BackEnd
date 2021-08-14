@@ -6,18 +6,26 @@ import java.util.List;
 public class Cuisine {
     private int id;
     private String foodType;
+    private String image;
     private int price;
-    private int menuId;
+    private int menu_id;
     private static List<Cuisine> instances = new ArrayList<Cuisine>();
 
-
-
-    public Cuisine(int id, String FoodType, int price, int MenuId){
+    public Cuisine(int id, String foodType, String image, int price, int menu_id) {
         this.id = id;
-        this.foodType = FoodType;
+        this.foodType = foodType;
+        this.image = image;
         this.price = price;
-        this.menuId = MenuId;
-        instances.add(this);
+        this.menu_id = menu_id;
+    }
+
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public static List<Cuisine> getInstances() {
@@ -52,11 +60,11 @@ public class Cuisine {
         this.price = price;
     }
 
-    public int getMenuId() {
-        return menuId;
+    public int getMenu_id() {
+        return menu_id;
     }
 
-    public void setMenuId(int menuId) {
-        menuId = menuId;
+    public void setMenu_id(int menu_id) {
+        this.menu_id = menu_id;
     }
 }

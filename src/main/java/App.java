@@ -87,17 +87,17 @@ public class App {
             return gson.toJson(menu);
         });
 
-        //Read all departments
+        //Read all menu Items
         get("/api/v1/menus", "application/json", (req, res) -> { //accept a request in format JSON from an app
             return gson.toJson(menuDao.getAll());//send it back to be displayed
         });
 
-        //Get department by Id
+        //Get menu by Id
         get("/api/v1/menus/:id", "application/json", (req, res) -> { //accept a request in format JSON from an app
-            int departmentId = Integer.parseInt(req.params("id"));
-            Menu menuToFind = menuDao.findById(departmentId);
+            int menuId = Integer.parseInt(req.params("id"));
+            Menu menuToFind = menuDao.findById(menuId);
             if (menuToFind == null){
-                throw new ApiException(404, String.format("No department with the id: \"%s\" exists", req.params("id")));
+                throw new ApiException(404, String.format("No menu with the id: \"%s\" exists", req.params("id")));
             }
             else {
                 return gson.toJson(menuToFind);
@@ -105,8 +105,19 @@ public class App {
 
         });
 
-
-
+        get("/api/v1/menus/:id/cuisines", "application/json", (req, res) -> {
+            int menuId = Integer.parseInt(req.params("id"));
+            Menu menuToFind = menuDao.findById(menuId);
+            if (menuToFind == null){
+                throw new ApiException(404, String.format("No menu item with the id: \"%s\" exists", req.params("id")));
+            }
+            else if (menuDao.getAllCuisinesInAMenu(menuId).size()==0){
+                return "{\"message\":\"I'm sorry, but no foodtypes are listed for this restaurant.\"}";
+            }
+            else {
+                return gson.toJson(menuDao.getAllCuisinesInAMenu(menuId));
+            }
+        });
 
 
 
@@ -137,6 +148,7 @@ public class App {
 
 
 
+
         //Create a Shop
         post("/api/v1/shops/new", "application/json", (req, res)->{
             Shop shop = gson.fromJson(req.body(),Shop.class);
@@ -160,6 +172,48 @@ public class App {
               return gson.toJson(shop);
           }
         });
+
+
+        get("/api/v1/shops/:id/menus", "application/json", (req,res)->{
+            int shopId = Integer.parseInt(req.params("id"));
+            Shop shop = shopDao.findById(shopId);
+
+            if (shop == null){
+                throw new ApiException(404, String.format("No shop or outlet item with the id: \"%s\" exists", req.params("id")));
+            }
+            else if (shopDao.getAllMenusForAShop(shopId).size()==0){
+                return "{\"message\":\"I'm sorry, but no foodtypes are listed for this restaurant.\"}";
+            }
+            else {
+                return gson.toJson(shopDao.getAllMenusForAShop(shopId));
+            }
+        });
+
+
+        get("/api/v1/shops/:id/waiters", "application/json", (req,res)->{
+            int shopId = Integer.parseInt(req.params("id"));
+            Shop shop = shopDao.findById(shopId);
+
+            if (shop == null){
+                throw new ApiException(404, String.format("No shop or outlet item with the id: \"%s\" exists", req.params("id")));
+            }
+            else if (shopDao.getAllWaitersForAShop(shopId).size()==0){
+                return "{\"message\":\"I'm sorry, but no foodtypes are listed for this restaurant.\"}";
+            }
+            else {
+                return gson.toJson(shopDao.getAllWaitersForAShop(shopId));
+            }
+        });
+
+
+
+
+
+
+
+
+
+
 
 
         //Create a table
@@ -230,12 +284,13 @@ public class App {
         //Get department by Id
         get("/api/v1/cuisines/:id", "application/json", (req, res) -> { //accept a request in format JSON from an app
             int cuisineId = Integer.parseInt(req.params("id"));
-            Cuisine cusineToFind = cuisineDao.findById(cuisineId);
-            if (cusineToFind == null){
+            Cuisine cuisineToFind = cuisineDao.findById(cuisineId);
+            if (cuisineToFind == null){
                 throw new ApiException(404, String.format("No cuisineId with the id: \"%s\" exists", req.params("id")));
             }
             else {
-                return gson.toJson(cuisineDao);
+                return gson.toJson(cuisineToFind);
+
             }
 
         });

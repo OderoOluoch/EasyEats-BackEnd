@@ -1,5 +1,6 @@
 package dao;
 
+import model.Cuisine;
 import model.Menu;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public interface MenuDao {
     //Retrieve menu by ID
     Menu findById(int id);
 
-    List<Menu>getAllMenusForAShop(int id);
+    List<Cuisine>getAllCuisinesInAMenu(int id);
 
     //retrieve all menu items in the DB
     List<Menu> getAll();

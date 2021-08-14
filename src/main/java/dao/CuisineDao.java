@@ -11,6 +11,7 @@ public interface CuisineDao {
     //READ
     List<Cuisine> getAll();
     List <Cuisine> getAllCuisinesForAMenu(int id);
+//    List<Cuisine> getAllCuisinesByMenuItem(int menuId);
     Cuisine findById(int id);
 
     //UPDATE

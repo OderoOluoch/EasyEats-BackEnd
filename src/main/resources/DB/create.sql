@@ -4,7 +4,9 @@ CREATE DATABASE easyeats;
 
 CREATE TABLE IF NOT EXISTS shops (
   id serial PRIMARY KEY,
-  name VARCHAR
+  name VARCHAR,
+  tagline VARCHAR,
+  image VARCHAR
 );
 
 CREATE TABLE IF NOT EXISTS waiter (
@@ -15,8 +17,7 @@ CREATE TABLE IF NOT EXISTS waiter (
 
 CREATE TABLE IF NOT EXISTS order_type (
   id serial PRIMARY KEY,
-  name VARCHAR,
-  shop_id INTEGER
+  name VARCHAR
 );
 
 CREATE TABLE IF NOT EXISTS next_gen_table (
@@ -34,6 +35,7 @@ CREATE TABLE IF NOT EXISTS menu (
 CREATE TABLE IF NOT EXISTS cuisines(
 id serial PRIMARY KEY,
 foodType VARCHAR,
+image VARCHAR,
 price INTEGER,
 menu_id INTEGER
 );

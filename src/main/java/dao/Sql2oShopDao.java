@@ -1,6 +1,8 @@
 package dao;
 
+import model.Menu;
 import model.Shop;
+import model.Waiter;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import org.sql2o.Sql2oException;
@@ -17,12 +19,15 @@ public class Sql2oShopDao implements ShopDao {
 
     @Override
     public void add(Shop shop) {
-        String sql = "INSERT INTO shops(name) VALUES(:name)";
+        String sql = "INSERT INTO shops(name,tagline,image) VALUES(:name, :tagline, :image)";
         try (Connection con = sql2o.open()){
             int id = (int) con.createQuery(sql, true)
                     .bind(shop)
-                    .executeUpdate().getKey();
+                    .executeUpdate()
+                    .getKey();
             shop.setId(id);
+        }catch (Sql2oException ex) {
+            System.out.println(ex);
         }
     }
 
@@ -43,15 +48,16 @@ public class Sql2oShopDao implements ShopDao {
     }
 
     @Override
-    public void update(Shop shop, int id, String name) {
-        String sql = "UPDATE shops SET(name)=(:name) WHERE id=:id";
+    public void update(Shop shop, int id, String name,String tagline,String image) {
+        String sql = "UPDATE shops SET(name,tagline,image)=(:name,:tagline,:image) WHERE id=:id";
         try(Connection con = sql2o.open()){
             con.createQuery(sql)
                     .addParameter("id", id)
                     .addParameter("name", name)
+                    .addParameter("tagline", tagline)
+                    .addParameter("image", image)
                     .executeUpdate();
             shop.setName(name);
-
         }
     }
 
@@ -76,4 +82,25 @@ public class Sql2oShopDao implements ShopDao {
             System.out.println(ex);
         }
     }
+
+
+    @Override
+    public List<Menu> getAllMenusForAShop(int shop_id) {
+        try (Connection con = sql2o.open()) {
+            return con.createQuery("SELECT * FROM menu WHERE shop_id = :shop_id")
+                    .addParameter("shop_id", shop_id)
+                    .executeAndFetch(Menu.class);
+        }
+    }
+
+
+    @Override
+    public List<Waiter> getAllWaitersForAShop(int shop_id) {
+        try (Connection con = sql2o.open()) {
+            return con.createQuery("SELECT * FROM waiter WHERE shop_id = :shop_id")
+                    .addParameter("shop_id", shop_id)
+                    .executeAndFetch(Waiter.class);
+        }
+    }
+
 }
