@@ -17,8 +17,7 @@ CREATE TABLE IF NOT EXISTS waiter (
 
 CREATE TABLE IF NOT EXISTS order_type (
   id serial PRIMARY KEY,
-  name VARCHAR,
-  shop_id INTEGER
+  name VARCHAR
 );
 
 CREATE TABLE IF NOT EXISTS next_gen_table (

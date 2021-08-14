@@ -121,8 +121,6 @@ public class App {
 
 
 
-
-
         //Create a waiter item
         post("/api/v1/waiters/new", "application/json", (req, res) -> {
             Waiter waiter = gson.fromJson(req.body(), Waiter.class);
@@ -188,6 +186,22 @@ public class App {
             }
             else {
                 return gson.toJson(shopDao.getAllMenusForAShop(shopId));
+            }
+        });
+
+
+        get("/api/v1/shops/:id/waiters", "application/json", (req,res)->{
+            int shopId = Integer.parseInt(req.params("id"));
+            Shop shop = shopDao.findById(shopId);
+
+            if (shop == null){
+                throw new ApiException(404, String.format("No shop or outlet item with the id: \"%s\" exists", req.params("id")));
+            }
+            else if (shopDao.getAllWaitersForAShop(shopId).size()==0){
+                return "{\"message\":\"I'm sorry, but no foodtypes are listed for this restaurant.\"}";
+            }
+            else {
+                return gson.toJson(shopDao.getAllWaitersForAShop(shopId));
             }
         });
 

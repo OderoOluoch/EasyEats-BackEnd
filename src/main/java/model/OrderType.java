@@ -5,21 +5,14 @@ import java.util.Objects;
 public class OrderType {
     private int id;
     private String name;
-    private int shop_id;
 
-    public OrderType(int id, String name, int shop_id) {
+
+    public OrderType(int id, String name) {
         this.id = id;
         this.name = name;
-        this.shop_id = shop_id;
+
     }
 
-    public int getShop_id() {
-        return shop_id;
-    }
-
-    public void setShop_id(int shop_id) {
-        this.shop_id = shop_id;
-    }
 
     public int getId() {
         return id;

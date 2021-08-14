@@ -2,6 +2,7 @@ package dao;
 
 import model.Menu;
 import model.Shop;
+import model.Waiter;
 
 import java.util.List;
 
@@ -21,4 +22,6 @@ public interface ShopDao {
     //DELETE
     void deleteById(int id);
     void clearAllShops();
+
+    List<Waiter> getAllWaitersForAShop(int shop_id);
 }

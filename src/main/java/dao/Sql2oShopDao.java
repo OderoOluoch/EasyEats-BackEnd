@@ -2,6 +2,7 @@ package dao;
 
 import model.Menu;
 import model.Shop;
+import model.Waiter;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import org.sql2o.Sql2oException;
@@ -89,6 +90,16 @@ public class Sql2oShopDao implements ShopDao {
             return con.createQuery("SELECT * FROM menu WHERE shop_id = :shop_id")
                     .addParameter("shop_id", shop_id)
                     .executeAndFetch(Menu.class);
+        }
+    }
+
+
+    @Override
+    public List<Waiter> getAllWaitersForAShop(int shop_id) {
+        try (Connection con = sql2o.open()) {
+            return con.createQuery("SELECT * FROM waiter WHERE shop_id = :shop_id")
+                    .addParameter("shop_id", shop_id)
+                    .executeAndFetch(Waiter.class);
         }
     }
 
