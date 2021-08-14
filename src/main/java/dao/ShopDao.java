@@ -1,5 +1,6 @@
 package dao;
 
+import model.Menu;
 import model.Shop;
 
 import java.util.List;
@@ -10,6 +11,8 @@ public interface ShopDao {
 
     //READ
     List<Shop> getAll();
+    List<Menu>getAllMenusForAShop(int id);
+
     Shop findById(int id);
 
     //UPDATE

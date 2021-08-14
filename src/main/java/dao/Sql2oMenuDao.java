@@ -29,14 +29,14 @@ public class Sql2oMenuDao implements MenuDao {
         }
     }
 
-    @Override
-    public List<Menu> getAllMenusForAShop(int shopId) {
-        try (Connection con = sql2o.open()) {
-            return con.createQuery("SELECT * FROM menu WHERE shop_id = :shopId")
-                    .addParameter("restaurantId", shopId)
-                    .executeAndFetch(Menu.class);
-        }
-    }
+//    @Override
+//    public List<Menu> getAllMenusForAShop(int shopId) {
+//        try (Connection con = sql2o.open()) {
+//            return con.createQuery("SELECT * FROM menu WHERE shop_id = :shopId")
+//                    .addParameter("restaurantId", shopId)
+//                    .executeAndFetch(Menu.class);
+//        }
+//    }
 
 
     @Override
@@ -56,6 +56,9 @@ public class Sql2oMenuDao implements MenuDao {
                     .executeAndFetchFirst(Menu.class);
         }
     }
+
+
+
 
     @Override
     public void deleteById(int id) {

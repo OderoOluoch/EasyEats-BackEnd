@@ -12,7 +12,6 @@ public interface MenuDao {
     //Retrieve menu by ID
     Menu findById(int id);
 
-    List<Menu>getAllMenusForAShop(int id);
 
     //retrieve all menu items in the DB
     List<Menu> getAll();

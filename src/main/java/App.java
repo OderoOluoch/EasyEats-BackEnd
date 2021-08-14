@@ -104,19 +104,20 @@ public class App {
             }
 
         });
-        get("/api/v1/menus/:id/foodtypes", "application/json", (req, res) -> {
-            int menuId = Integer.parseInt(req.params("id"));
-            Menu menuToFind = menuDao.findById(menuId);
-            if (menuToFind == null){
-                throw new ApiException(404, String.format("No menu item with the id: \"%s\" exists", req.params("id")));
-            }
-            else if (menuDao.getAllFoodtypesByRestaurant(menuId).size()==0){
-                return "{\"message\":\"I'm sorry, but no foodtypes are listed for this restaurant.\"}";
-            }
-            else {
-                return gson.toJson(menuDao.getAllFoodtypesByRestaurant(menuId));
-            }
-        });
+
+//        get("/api/v1/menus/:id/cuisines", "application/json", (req, res) -> {
+//            int menuId = Integer.parseInt(req.params("id"));
+//            Menu menuToFind = menuDao.findById(menuId);
+//            if (menuToFind == null){
+//                throw new ApiException(404, String.format("No menu item with the id: \"%s\" exists", req.params("id")));
+//            }
+//            else if (menuDao.getAllMenusForAShop(menuId).size()==0){
+//                return "{\"message\":\"I'm sorry, but no foodtypes are listed for this restaurant.\"}";
+//            }
+//            else {
+//                return gson.toJson(menuDao.getAllMenusForAShop(menuId));
+//            }
+//        });
 
 
 
@@ -173,6 +174,33 @@ public class App {
               return gson.toJson(shop);
           }
         });
+
+
+        get("/api/v1/shops/:id/menus", "application/json", (req,res)->{
+            int shopId = Integer.parseInt(req.params("id"));
+            Shop shop = shopDao.findById(shopId);
+
+            if (shop == null){
+                throw new ApiException(404, String.format("No shop or outlet item with the id: \"%s\" exists", req.params("id")));
+            }
+            else if (shopDao.getAllMenusForAShop(shopId).size()==0){
+                return "{\"message\":\"I'm sorry, but no foodtypes are listed for this restaurant.\"}";
+            }
+            else {
+                return gson.toJson(shopDao.getAllMenusForAShop(shopId));
+            }
+
+
+
+        });
+
+
+
+
+
+
+
+
 
 
         //Create a table
