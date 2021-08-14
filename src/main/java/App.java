@@ -87,22 +87,35 @@ public class App {
             return gson.toJson(menu);
         });
 
-        //Read all departments
+        //Read all menu Items
         get("/api/v1/menus", "application/json", (req, res) -> { //accept a request in format JSON from an app
             return gson.toJson(menuDao.getAll());//send it back to be displayed
         });
 
-        //Get department by Id
+        //Get menu by Id
         get("/api/v1/menus/:id", "application/json", (req, res) -> { //accept a request in format JSON from an app
-            int departmentId = Integer.parseInt(req.params("id"));
-            Menu menuToFind = menuDao.findById(departmentId);
+            int menuId = Integer.parseInt(req.params("id"));
+            Menu menuToFind = menuDao.findById(menuId);
             if (menuToFind == null){
-                throw new ApiException(404, String.format("No department with the id: \"%s\" exists", req.params("id")));
+                throw new ApiException(404, String.format("No menu with the id: \"%s\" exists", req.params("id")));
             }
             else {
                 return gson.toJson(menuToFind);
             }
 
+        });
+        get("/api/v1/menus/:id/foodtypes", "application/json", (req, res) -> {
+            int menuId = Integer.parseInt(req.params("id"));
+            Menu menuToFind = menuDao.findById(menuId);
+            if (menuToFind == null){
+                throw new ApiException(404, String.format("No menu item with the id: \"%s\" exists", req.params("id")));
+            }
+            else if (menuDao.getAllFoodtypesByRestaurant(menuId).size()==0){
+                return "{\"message\":\"I'm sorry, but no foodtypes are listed for this restaurant.\"}";
+            }
+            else {
+                return gson.toJson(menuDao.getAllFoodtypesByRestaurant(menuId));
+            }
         });
 
 
