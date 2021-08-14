@@ -105,20 +105,19 @@ public class App {
 
         });
 
-//        get("/api/v1/menus/:id/cuisines", "application/json", (req, res) -> {
-//            int menuId = Integer.parseInt(req.params("id"));
-//            Menu menuToFind = menuDao.findById(menuId);
-//            if (menuToFind == null){
-//                throw new ApiException(404, String.format("No menu item with the id: \"%s\" exists", req.params("id")));
-//            }
-//            else if (menuDao.getAllMenusForAShop(menuId).size()==0){
-//                return "{\"message\":\"I'm sorry, but no foodtypes are listed for this restaurant.\"}";
-//            }
-//            else {
-//                return gson.toJson(menuDao.getAllMenusForAShop(menuId));
-//            }
-//        });
-
+        get("/api/v1/menus/:id/cuisines", "application/json", (req, res) -> {
+            int menuId = Integer.parseInt(req.params("id"));
+            Menu menuToFind = menuDao.findById(menuId);
+            if (menuToFind == null){
+                throw new ApiException(404, String.format("No menu item with the id: \"%s\" exists", req.params("id")));
+            }
+            else if (menuDao.getAllCuisinesInAMenu(menuId).size()==0){
+                return "{\"message\":\"I'm sorry, but no foodtypes are listed for this restaurant.\"}";
+            }
+            else {
+                return gson.toJson(menuDao.getAllCuisinesInAMenu(menuId));
+            }
+        });
 
 
 
@@ -271,12 +270,13 @@ public class App {
         //Get department by Id
         get("/api/v1/cuisines/:id", "application/json", (req, res) -> { //accept a request in format JSON from an app
             int cuisineId = Integer.parseInt(req.params("id"));
-            Cuisine cusineToFind = cuisineDao.findById(cuisineId);
-            if (cusineToFind == null){
+            Cuisine cuisineToFind = cuisineDao.findById(cuisineId);
+            if (cuisineToFind == null){
                 throw new ApiException(404, String.format("No cuisineId with the id: \"%s\" exists", req.params("id")));
             }
             else {
-                return gson.toJson(cuisineDao);
+                return gson.toJson(cuisineToFind);
+
             }
 
         });

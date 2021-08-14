@@ -66,7 +66,7 @@ public class Sql2oCuisineDao  implements CuisineDao{
                     .executeUpdate();
             cuisine.setFoodType(FoodType);
             cuisine.setPrice(price);
-            cuisine.setMenuId(menu_id);
+            cuisine.setMenu_id(menu_id);
         }
     }
 

@@ -1,5 +1,6 @@
 package dao;
 
+import model.Cuisine;
 import model.Menu;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
@@ -29,14 +30,14 @@ public class Sql2oMenuDao implements MenuDao {
         }
     }
 
-//    @Override
-//    public List<Menu> getAllMenusForAShop(int shopId) {
-//        try (Connection con = sql2o.open()) {
-//            return con.createQuery("SELECT * FROM menu WHERE shop_id = :shopId")
-//                    .addParameter("restaurantId", shopId)
-//                    .executeAndFetch(Menu.class);
-//        }
-//    }
+    @Override
+    public List<Cuisine> getAllCuisinesInAMenu(int menu_id) {
+        try (Connection con = sql2o.open()) {
+            return con.createQuery("SELECT * FROM cuisines WHERE menu_id = :menu_id")
+                    .addParameter("menu_id", menu_id)
+                    .executeAndFetch(Cuisine.class);
+        }
+    }
 
 
     @Override
