@@ -4,7 +4,9 @@ CREATE DATABASE easyeats;
 
 CREATE TABLE IF NOT EXISTS shops (
   id serial PRIMARY KEY,
-  name VARCHAR
+  name VARCHAR,
+  tagline VARCHAR,
+  image VARCHAR,
 );
 
 CREATE TABLE IF NOT EXISTS waiter (
