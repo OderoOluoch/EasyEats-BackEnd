@@ -112,7 +112,7 @@ public class App {
                 throw new ApiException(404, String.format("No menu item with the id: \"%s\" exists", req.params("id")));
             }
             else if (menuDao.getAllCuisinesInAMenu(menuId).size()==0){
-                return "{\"message\":\"I'm sorry, but no foodtypes are listed for this restaurant.\"}";
+                return "{\"message\":\"I'm sorry, but no food are listed for this restaurant.\"}";
             }
             else {
                 return gson.toJson(menuDao.getAllCuisinesInAMenu(menuId));
@@ -182,7 +182,7 @@ public class App {
                 throw new ApiException(404, String.format("No shop or outlet item with the id: \"%s\" exists", req.params("id")));
             }
             else if (shopDao.getAllMenusForAShop(shopId).size()==0){
-                return "{\"message\":\"I'm sorry, but no foodtypes are listed for this restaurant.\"}";
+                return "{\"message\":\"I'm sorry, but no food are listed for this restaurant.\"}";
             }
             else {
                 return gson.toJson(shopDao.getAllMenusForAShop(shopId));
@@ -198,7 +198,7 @@ public class App {
                 throw new ApiException(404, String.format("No shop or outlet item with the id: \"%s\" exists", req.params("id")));
             }
             else if (shopDao.getAllWaitersForAShop(shopId).size()==0){
-                return "{\"message\":\"I'm sorry, but no foodtypes are listed for this restaurant.\"}";
+                return "{\"message\":\"I'm sorry, but no food are listed for this restaurant.\"}";
             }
             else {
                 return gson.toJson(shopDao.getAllWaitersForAShop(shopId));
