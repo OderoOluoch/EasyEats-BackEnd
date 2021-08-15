@@ -15,7 +15,7 @@ public interface CuisineDao {
     Cuisine findById(int id);
 
     //UPDATE
-    void update(Cuisine cuisine,int id, String FoodType,int price, int MenuId);
+    void update(Cuisine cuisine,int id, String food,int price, int MenuId);
 
     //DELETE
     void deleteById(int id);

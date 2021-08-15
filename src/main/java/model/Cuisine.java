@@ -5,15 +5,15 @@ import java.util.List;
 
 public class Cuisine {
     private int id;
-    private String foodType;
+    private String food;
     private String image;
     private int price;
     private int menu_id;
     private static List<Cuisine> instances = new ArrayList<Cuisine>();
 
-    public Cuisine(int id, String foodType, String image, int price, int menu_id) {
+    public Cuisine(int id, String food, String image, int price, int menu_id) {
         this.id = id;
-        this.foodType = foodType;
+        this.food = food;
         this.image = image;
         this.price = price;
         this.menu_id = menu_id;
@@ -44,12 +44,12 @@ public class Cuisine {
         this.id = id;
     }
 
-    public String getFoodType() {
-        return foodType;
+    public String getFood() {
+        return food;
     }
 
-    public void setFoodType(String foodType) {
-        foodType = foodType;
+    public void setFood(String food) {
+        this.food = food;
     }
 
     public int getPrice() {
