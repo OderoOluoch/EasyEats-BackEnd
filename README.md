@@ -38,36 +38,46 @@ CREATE DATABASE easyeats;
 ```
 
 ```
+SET MODE PostgreSQL;
+
+CREATE DATABASE easyeats;
+
 CREATE TABLE IF NOT EXISTS shops (
   id serial PRIMARY KEY,
-  name VARCHAR
+  name VARCHAR,
+  tagline VARCHAR,
+  image VARCHAR
 );
 
-CREATE TABLE IF NOT EXISTS waiters (
+CREATE TABLE IF NOT EXISTS waiter (
+  id serial PRIMARY KEY,
+  name VARCHAR,
+  shop_id INTEGER
+);
+
+CREATE TABLE IF NOT EXISTS order_type (
   id serial PRIMARY KEY,
   name VARCHAR
 );
 
-CREATE TABLE IF NOT EXISTS order_types (
+CREATE TABLE IF NOT EXISTS next_gen_table (
   id serial PRIMARY KEY,
   name VARCHAR
 );
 
-CREATE TABLE IF NOT EXISTS next_gen_tables (
+CREATE TABLE IF NOT EXISTS menu (
   id serial PRIMARY KEY,
-  name VARCHAR
-);
-
-CREATE TABLE IF NOT EXISTS menus (
-  id serial PRIMARY KEY,
-  name VARCHAR
+  name VARCHAR,
+  description VARCHAR,
+  shop_id INTEGER
 );
 
 CREATE TABLE IF NOT EXISTS cuisines(
 id serial PRIMARY KEY,
 food VARCHAR,
+image VARCHAR,
 price INTEGER,
-menuId INTEGER
+menu_id INTEGER
 );
 ```
 
@@ -94,13 +104,15 @@ $ gradle run
 
 ``api/v1/menus - GET - Get a list of all menu Items``
 
-``api/v1/menus/new  - POST - send an object with menu name.``
+``api/v1/menus/new  - POST - send an object with menu name, description and shop_id .``
 
 ``api/v1/menus/{id}    - GET - Get a menu item by id.``
 
+``api/v1/menus/{id}/cuisines - GET - Get a list of all food cuisines of a specific menu category item``
+
 ``api/v1/waiters - GET - Get a list of all waiter Items``
 
-``api/v1/waiters/new  - POST - send an object with waiter name.``
+``api/v1/waiters/new  - POST - send an object with waiter name and shop_id ``
 
 ``api/v1/waiters/{id}    - GET - Get a waiter item by id.``
 
@@ -110,17 +122,27 @@ $ gradle run
 
 ``api/v1/shops/{id}    - GET - Get a shop item by id.``
 
-``api/v1/tables - GET - Get a list of all menu Items``
+``api/v1/shops/{id}/menus    - GET - Get a list of all menu category items in a specific shop.``
 
-``api/v1/tables/new  - POST - send an object with menu name.``
+``api/v1/shops/{id}/waiters    - GET - Get all waiters in a specific shop.``
 
-``api/v1/tables/{id}    - GET - Get a menu item by id.``
+``api/v1/tables - GET - Get a list of all tables``
+
+``api/v1/tables/new  - POST - send an object with table name.``
+
+``api/v1/tables/{id}    - GET - Get a table item by id.``
 
 ``api/v1/order_types - GET - Get a list of all order type Items``
 
 ``api/v1/order_types/new  - POST - send an object with order type name.``
 
 ``api/v1/order_types/{id}    - GET - Get an order type item by id.``
+
+``api/v1/cuisines - GET - Get a list of all food and cusines available``
+
+``api/v1/cuisines/new  - POST - send an object with food, image url , price and menu_id``
+
+``api/v1/cuisines/{id}    - GET - Get an order type item by id.``
 
 
 * when testing with postman, use as the base URL.
